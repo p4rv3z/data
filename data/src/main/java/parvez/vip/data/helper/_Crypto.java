@@ -1,7 +1,8 @@
-package parvez.vip.data.services;
+package parvez.vip.data.helper;
 
 
-import android.os.Build;
+import android.util.Base64;
+import android.util.Log;
 
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -13,7 +14,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 /**
  * Project: Data
@@ -37,21 +37,17 @@ public class _Crypto {
             Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.ENCRYPT_MODE, key);
             byte[] encVal = c.doFinal(data.getBytes());
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                return Base64.getEncoder().encodeToString(encVal);
-//            } else {
-            return android.util.Base64.encodeToString(encVal, android.util.Base64.DEFAULT);
-            // }
+            return Base64.encodeToString(encVal, Base64.DEFAULT);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (BadPaddingException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (InvalidKeyException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         }
         return null;
     }
@@ -68,24 +64,19 @@ public class _Crypto {
             Key key = generateKey(password);
             Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.DECRYPT_MODE, key);
-            byte[] decordedValue = new byte[0];
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//                decordedValue = Base64.getDecoder().decode(data);
-//            } else {
-            decordedValue = android.util.Base64.decode(data, android.util.Base64.DEFAULT);
-            //}
-            byte[] decValue = c.doFinal(decordedValue);
+            byte[] decodedValue = Base64.decode(data, Base64.DEFAULT);
+            byte[] decValue = c.doFinal(decodedValue);
             return new String(decValue);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (BadPaddingException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         } catch (InvalidKeyException e) {
-            e.printStackTrace();
+            Log.e("_Crypto->",e.getMessage());
         }
         return null;
     }
