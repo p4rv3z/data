@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import parvez.vip.data.helper._Crypto;
 import parvez.vip.data.helper._Database;
 
 /**
@@ -21,26 +22,49 @@ public class _DB {
     private static SQLiteDatabase sqLiteDatabase;
     private static final String TAG = "_DB";
 
+
+    /**
+     * constructor
+     */
     private _DB() {
 
     }
 
+    /**
+     * Create database
+     *
+     * @param context
+     */
     private static void getInstance(Context context) {
         sqLiteOpenHelper = new _Database(context);
-
     }
 
+
+    /**
+     * open database
+     */
     private static void dbOpen() {
         sqLiteDatabase = sqLiteOpenHelper.getWritableDatabase();
         Log.d(TAG, "DATABASE OPENED");
     }
 
+
+    /**
+     * close database
+     */
     private static void dbClose() {
         sqLiteOpenHelper.close();
         Log.d(TAG, "DATABASE CLOSED");
     }
 
-    public static boolean save(Context context, String key, String data) {
+
+    /**
+     * @param context
+     * @param data
+     * @param key
+     * @return true if successfully saved data
+     */
+    public static boolean save(Context context, String data, String key) {
         getInstance(context);
         dbOpen();
         ContentValues contentValues = new ContentValues();
@@ -57,6 +81,25 @@ public class _DB {
         }
     }
 
+
+    /**
+     * @param context
+     * @param data
+     * @param key
+     * @param password
+     * @return true if successfully saved data
+     */
+    public static boolean save(Context context, String data, String key, String password) {
+        data = _Crypto.encrypt(data, password);
+        return save(context, data, key);
+    }
+
+
+    /**
+     * @param context
+     * @param key
+     * @return return saved data
+     */
     public static String load(Context context, String key) {
         getInstance(context);
         dbOpen();
@@ -77,8 +120,27 @@ public class _DB {
 
     }
 
+
+    /**
+     * @param context
+     * @param key
+     * @param password
+     * @return return saved data
+     */
+    public static String load(Context context, String key, String password) {
+        String enData = load(context, key);
+        return _Crypto.decrypt(enData, password);
+    }
+
+
+    /**
+     * check variable is available or not
+     *
+     * @param key
+     * @return
+     */
     private static boolean isAvailable(String key) {
-        String where = "variable=" + "\"" + key + "\"";
+        String where = _Database.COLUMNS[0] + "=" + "\"" + key + "\"";
         boolean isAvailable = sqLiteDatabase.query(_Database.TABLE_NAME, _Database.COLUMNS, where, null, null, null, null).getCount() > 0;
         Log.d(TAG, "Data Available: " + isAvailable);
         return isAvailable;

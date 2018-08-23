@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
 //        _File.saveFile(this,"par.db",data,"par");
 //        String deData = _File.loadFile(this,"par.db","par");
 
-        _DB.save(this,"par", data);
-        String deData = _DB.load(this,"par");
+        _DB.save(this, data,"par2", "par");
+        String deData = _DB.load(this,"par2","par");
 
         tv.setText(deData);
     }
