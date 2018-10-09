@@ -24,7 +24,14 @@ import java.security.NoSuchAlgorithmException;
  */
 public class _Crypto {
     private static final String ALGORITHM = "AES";
+    public static final String TAG = "_Data_Crypto__";
 
+    /**
+     * constructor
+     */
+    private _Crypto(){
+
+    }
     /**
      * @param data
      * @param password
@@ -39,15 +46,15 @@ public class _Crypto {
             byte[] encVal = c.doFinal(data.getBytes());
             return Base64.encodeToString(encVal, Base64.DEFAULT);
         } catch (NoSuchAlgorithmException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (NoSuchPaddingException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (BadPaddingException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (IllegalBlockSizeException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (InvalidKeyException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         }
         return null;
     }
@@ -68,15 +75,15 @@ public class _Crypto {
             byte[] decValue = c.doFinal(decodedValue);
             return new String(decValue);
         } catch (NoSuchAlgorithmException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (NoSuchPaddingException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (BadPaddingException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (IllegalBlockSizeException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         } catch (InvalidKeyException e) {
-            Log.e("_Crypto->",e.getMessage());
+            Log.e(TAG,e.getMessage());
         }
         return null;
     }

@@ -16,13 +16,13 @@ public class _Database extends SQLiteOpenHelper {
 
     private static final String TAG = "_DB";
 
-    private static final String DATABASE_NAME = "data.sqlite";
+    private static final String DATABASE_NAME = "data.db";
     public static final String TABLE_NAME = "data";
     public static final String[] COLUMNS = {"variable", "data", "created_at", "updated_at"};
     private static final int DATABASE_VERSION = 1;
 
 
-    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" + COLUMNS[0] + " varchar(100) NOT NULL, " + COLUMNS[1] + " text NOT NULL, " + COLUMNS[2] + " timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, " + COLUMNS[3] + " timestamp NOT NULL DEFAULT '0000-00-00 00:00:00')";
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" + COLUMNS[0] + " varchar(100) NOT NULL, " + COLUMNS[1] + " text NOT NULL, " + COLUMNS[2] + " timestamp NOT NULL DEFAULT '0000-00-00 00:00:00', " + COLUMNS[3] + " timestamp NOT NULL DEFAULT '0000-00-00 00:00:00')";
 
     public _Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
