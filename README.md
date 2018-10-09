@@ -20,7 +20,7 @@ allprojects {
 Add the dependency  
 ```
 dependencies {
-	        implementation 'com.github.p4rv3z:Data:1.0.0'
+	        implementation 'com.github.p4rv3z:data:1.0.0'
 	}
 ```
 
