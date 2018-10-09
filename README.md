@@ -1,6 +1,6 @@
 # Data
 
-Data is a very simple android library that can store data on internal storage.  
+Data is a very simple android library that can store and read data from internal storage.  
 You can store data very simply just one line of code using SharedPreferences, File and SQLite database.
 
 ## Setup
@@ -30,39 +30,33 @@ dependencies {
 One line of code to save data on your storage:
 ```
         _Data.preferences.saveString(context, data, key); // return boolean value
-
 ```
 
 One line of code to read data from your storage:
 ```
         _Data.preferences.loadString(context, key); //return data
-
 ```
 
 ### Using File
 One line of code to save data on your storage:
 ```
         _Data.file.saveString(context, data, key); // return boolean value
-
 ```
 
 One line of code to read data from your storage:
 ```
         _Data.file.loadString(context, key); //return data
-
 ```
 
 ### Using Database
 One line of code to save data on your storage:
 ```
         _Data.db.saveString(context, data, key); // return boolean value
-
 ```
 
 One line of code to read data from your storage:
 ```
         _Data.db.loadString(context, key); //return data
-
 ```
 
 
@@ -74,7 +68,6 @@ public static boolean saveString(@NonNull Context context, String data, @NonNull
 If you want to save your data safe as encrypted, you can use one extra parameter as password. So your data will encrypted with your password. And password will be 16 Character, you can also set password as null then your data will encrypted with default password.  
 ```
 public static boolean saveString(@NonNull Context context, String data, @NonNull String key, @Nullable String password)
-  
 ```
 
 Other functions:  
